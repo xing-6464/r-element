@@ -1,10 +1,15 @@
+import Button from './components/Button/button'
+
 function App() {
   return (
     <>
-      <h1>Hello world</h1>
-      <h2>Hello world</h2>
-      <h3>Hello world</h3>
-      <a href="">he</a>
+      <Button>hello</Button>
+      <Button btnType="danger" size="lg">
+        hello
+      </Button>
+      <Button btnType="link" size="lg" href="1.94.45.254:9002">
+        跳转
+      </Button>
     </>
   )
 }
