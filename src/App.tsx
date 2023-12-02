@@ -4,7 +4,7 @@ function App() {
   return (
     <>
       <Button>hello</Button>
-      <Button btnType="danger" size="lg">
+      <Button btnType="primary" size="lg">
         hello
       </Button>
       <Button disabled btnType="danger" size="lg">
