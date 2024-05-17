@@ -1,5 +1,4 @@
 import Button from './components/Button/Button'
-import './App.css'
 import { useRef } from 'react'
 
 function App() {
