@@ -1,0 +1,124 @@
+.x-button {
+  --x-button-font-weight: var(--x-font-weight-primary);
+  --x-button-border-color: var(--x-border-color);
+  --x-button-bg-color: var(--x-fill-color-blank);
+  --x-button-text-color: var(--x-text-color-regular);
+  --x-button-disabled-text-color: var(--x-disabled-text-color);
+  --x-button-disabled-bg-color: var(--x-fill-color-blank);
+  --x-button-disabled-border-color: var(--x-border-color-light);
+  --x-button-hover-text-color: var(--x-color-primary);
+  --x-button-hover-bg-color: var(--x-color-primary-light-9);
+  --x-button-hover-border-color: var(--x-color-primary-light-7);
+  --x-button-active-text-color: var(--x-button-hover-text-color);
+  --x-button-active-border-color: var(--x-color-primary);
+  --x-button-active-bg-color: var(--x-button-hover-bg-color);
+  --x-button-outline-color: var(--x-color-primary-light-5);
+  --x-button-active-color: var(--x-text-color-primary);
+}
+.x-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 1;
+  height: 32px;
+  white-space: nowrap;
+  cursor: pointer;
+  color: var(--x-button-text-color);
+  text-align: center;
+  box-sizing: border-box;
+  outline: none;
+  transition: .1s;
+  font-weight: var(--x-button-font-weight);
+  user-select: none;
+  vertical-align: middle;
+  -webkit-appearance: none;
+  background-color: var(--x-button-bg-color);
+  border: var(--x-border);
+  border-color: var(--x-button-border-color);
+  padding: 8px 15px;
+  font-size: var(--x-font-size-base);
+  border-radius: var(--x-border-radius-base);
+  & + & {
+    margin-left: 12px;
+  }
+  &:hover,
+  &:focus {
+    color: var(--x-button-hover-text-color);
+    border-color: var(--x-button-hover-border-color);
+    background-color: var(--x-button-hover-bg-color);
+    outline: none;    
+  }
+  &:active {
+    color: var(--x-button-active-text-color);
+    border-color: var(--x-button-active-border-color);
+    background-color: var(--x-button-active-bg-color);
+    outline: none;
+  }
+  &.is-plain {
+    --x-button-hover-text-color: var(--x-color-primary);
+    --x-button-hover-bg-color: var(--x-fill-color-blank);
+    --x-button-hover-border-color: var(--x-color-primary);    
+  }
+  /*round*/
+  &.is-round {
+    border-radius: var(--x-border-radius-round);
+  }
+  /*circle*/
+  &.is-circle {
+    border-radius: 50%;
+    padding: 8px;
+  }
+  /*disabled*/
+  &.is-disabled, &.is-disabled:hover, &.is-disabled:focus, 
+  &[disabled], &[disabled]:hover, &[disabled]:focus 
+  {
+    color: var(--x-button-disabled-text-color);
+    cursor: not-allowed;
+    background-image: none;
+    background-color: var(--x-button-disabled-bg-color);
+    border-color: var(--x-button-disabled-border-color);
+  }
+  [class*=x-icon] + span {
+    margin-left: 6px;
+  }
+}
+@each $val in primary,success,warning,info,danger {
+  .x-button--$(val) {
+    --x-button-text-color: var(--x-color-white);
+    --x-button-bg-color: var(--x-color-$(val));
+    --x-button-border-color: var(--x-color-$(val));
+    --x-button-outline-color: var(--x-color-$(val)-light-5);
+    --x-button-active-color: var(--x-color-$(val)-dark-2);
+    --x-button-hover-text-color: var(--x-color-white);
+    --x-button-hover-bg-color: var(--x-color-$(val)-light-3);
+    --x-button-hover-border-color: var(--x-color-$(val)-light-3);
+    --x-button-active-bg-color: var(--x-color-$(val)-dark-2);
+    --x-button-active-border-color: var(--x-color-$(val)-dark-2);
+    --x-button-disabled-text-color: var(--x-color-white);
+    --x-button-disabled-bg-color: var(--x-color-$(val)-light-5);
+    --x-button-disabled-border-color: var(--x-color-$(val)-light-5);
+  }
+  .x-button--$(val).is-plain {
+    --x-button-text-color: var(--x-color-$(val));
+    --x-button-bg-color: var(--x-color-$(val)-light-9);
+    --x-button-border-color: var(--x-color-$(val)-light-5);
+    --x-button-hover-text-color: var(--x-color-white);
+    --x-button-hover-bg-color: var(--x-color-$(val));
+    --x-button-hover-border-color: var(--x-color-$(val));
+    --x-button-active-text-color: var(--x-color-white);
+  }
+}
+.x-button--large {
+  --x-button-size: 40px;
+  height: var(--x-button-size);
+  padding: 12px 19px;
+  font-size: var(--x-font-size-base);
+  border-radius: var(--x-border-radius-base);
+}
+.x-button--small {
+  --x-button-size: 24px;
+  height: var(--x-button-size);
+  padding: 5px 11px;
+  font-size: 12px;
+  border-radius: calc(var(--x-border-radius-base) - 1px);
+}
