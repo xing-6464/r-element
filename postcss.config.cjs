@@ -1,5 +1,13 @@
-// eslint-disable-next-line no-undef
+/* eslint-env node */
 module.exports = {
-  // eslint-disable-next-line no-undef
-  plugins: [require('postcss-nested')],
+  plugins: [
+    require('postcss-each-variables'),
+    require('postcss-nested'),
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    require('postcss-each')({
+      plugins: {
+        beforeEach: [require('postcss-for'), require('postcss-color-mix')],
+      },
+    }),
+  ],
 }

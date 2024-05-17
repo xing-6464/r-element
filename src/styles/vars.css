@@ -56,7 +56,7 @@
   @each $val, $color in var(--colors) {
     --x-color-$(val): $(color);
     @for $i from 3 to 9 by 2 {
-      --x-color-$(val)-light-$(i): mix(#fff, $(color), .$(i))
+      --x-color-$(val)-light-$(i): mix(#fff, $(color), .$(i));
     }
     --x-color-$(val)-light-8: mix(#fff, $(color), 0.8);
     --x-color-$(val)-dark-2: mix(#000, $(color), 0.2);
