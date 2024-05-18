@@ -1,5 +1,7 @@
 import Button from './components/Button/Button'
 import { useRef } from 'react'
+import Collapse from './components/Collapse/Collapse'
+import CollapseItem from './components/Collapse/CollapseItem'
 
 function App() {
   const ref = useRef(null)
@@ -31,6 +33,19 @@ function App() {
       <Button type="info" plain>
         Info
       </Button>
+
+      <Collapse>
+        <CollapseItem name="a" title={<h1>nice title</h1>}>
+          <h1>headline title</h1>
+          <div>this is content aaa</div>
+        </CollapseItem>
+        <CollapseItem name="b" title="nice title b item b">
+          <div>this is bbbbb test</div>
+        </CollapseItem>
+        <CollapseItem name="c" title="nice title c item c" disabled>
+          <div>this is ccccc test</div>
+        </CollapseItem>
+      </Collapse>
     </>
   )
 }
