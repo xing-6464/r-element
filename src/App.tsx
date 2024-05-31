@@ -1,11 +1,17 @@
 import Button from './components/Button/Button'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import Collapse from './components/Collapse/Collapse'
 import CollapseItem from './components/Collapse/CollapseItem'
+import { NameType } from './components/Collapse/types'
 
 function App() {
   const ref = useRef(null)
-  console.log(ref.current)
+  const [openedValue, setOpenedValue] = useState<NameType[]>(['a'])
+
+  setTimeout(() => {
+    setOpenedValue(['b'])
+  }, 2000)
+
   return (
     <>
       <Button ref={ref}>Test Button</Button>
@@ -34,7 +40,7 @@ function App() {
         Info
       </Button>
 
-      <Collapse>
+      <Collapse accordion modeValue={openedValue} onChange={(value) => setOpenedValue(value)}>
         <CollapseItem name="a" title={<h1>nice title</h1>}>
           <h1>headline title</h1>
           <div>this is content aaa</div>
@@ -46,6 +52,7 @@ function App() {
           <div>this is ccccc test</div>
         </CollapseItem>
       </Collapse>
+      {openedValue}
     </>
   )
 }

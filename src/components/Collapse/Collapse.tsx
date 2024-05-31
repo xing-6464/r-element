@@ -1,34 +1,54 @@
-import { useState, createContext } from 'react'
+import { useState, createContext, useEffect } from 'react'
 import classNames from 'classnames'
 
 import type { CollapseProps, NameType, CollapseContext } from './types'
 
-export const context = createContext<CollapseContext>({ activeNames: [], setActiveNames: () => {} })
+// eslint-disable-next-line react-refresh/only-export-components
+export const collapseContext = createContext<CollapseContext>({
+  activeNames: [],
+  setActiveNames: () => {},
+})
 function Collapse(props: CollapseProps) {
-  const { className, children } = props
-  const [activeNames, setActiveNames] = useState<NameType[]>([])
+  const { className, accordion = false, modeValue, onChange, children } = props
+  const [activeNames, setActiveNames] = useState<NameType[]>(modeValue)
 
   const classes = classNames('x-collapse', className)
 
+  useEffect(() => {
+    setActiveNames(modeValue)
+    onChange(modeValue)
+  }, [modeValue])
+
+  if (accordion && activeNames.length > 1) {
+    console.warn('accordion only support single active item')
+  }
+
   const handleItemClick = (item: NameType) => {
-    const index = activeNames.indexOf(item)
-    if (index > -1) {
-      // 存在
-      setActiveNames((oldValue) => {
-        const newValue = [...oldValue]
-        newValue.splice(index, 1)
-        return newValue
-      })
+    // 是否为手风琴模式
+    if (accordion) {
+      const newValue = [activeNames[0] === item ? '' : item]
+      setActiveNames(newValue)
+      onChange(newValue)
     } else {
-      // 不存在
-      setActiveNames((oldValue) => [...oldValue, item])
+      const index = activeNames.indexOf(item)
+      const newValue = [...activeNames]
+      if (index > -1) {
+        // 存在
+        newValue.splice(index, 1)
+        setActiveNames(newValue)
+      } else {
+        // 不存在
+        newValue.push(item)
+        setActiveNames(newValue)
+      }
+      onChange(newValue)
     }
   }
 
   return (
-    <context.Provider value={{ activeNames, setActiveNames: handleItemClick }}>
+    <collapseContext.Provider value={{ activeNames, setActiveNames: handleItemClick }}>
       <div className={classes}>{children}</div>
-    </context.Provider>
+    </collapseContext.Provider>
   )
 }
 

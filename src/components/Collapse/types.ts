@@ -2,6 +2,9 @@ export type NameType = string | number
 
 export interface CollapseProps {
   className?: string
+  accordion?: boolean
+  modeValue: NameType[]
+  onChange: (value: NameType[]) => void
   children: React.ReactNode
 }
 

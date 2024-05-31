@@ -1,11 +1,11 @@
 import classNames from 'classnames'
-import { context } from './Collapse'
+import { collapseContext } from './Collapse'
 import type { CollapseItemProps } from './types'
 import { useContext, useMemo } from 'react'
 
 function CollapseItem(props: CollapseItemProps) {
   const { className, name, title, disabled, children } = props
-  const { activeNames, setActiveNames } = useContext(context)
+  const { activeNames, setActiveNames } = useContext(collapseContext)
   const isActive = useMemo(() => activeNames.includes(name), [activeNames, name])
 
   const classes = classNames('x-collapse-item', className, { 'is-disabled': disabled })
