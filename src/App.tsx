@@ -8,10 +8,6 @@ function App() {
   const ref = useRef(null)
   const [openedValue, setOpenedValue] = useState<NameType[]>(['a'])
 
-  setTimeout(() => {
-    setOpenedValue(['b'])
-  }, 2000)
-
   return (
     <>
       <Button ref={ref}>Test Button</Button>

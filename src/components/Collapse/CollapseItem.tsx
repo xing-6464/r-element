@@ -2,6 +2,7 @@ import classNames from 'classnames'
 import { collapseContext } from './Collapse'
 import type { CollapseItemProps } from './types'
 import { useContext, useMemo } from 'react'
+import { motion } from 'framer-motion'
 
 function CollapseItem(props: CollapseItemProps) {
   const { className, name, title, disabled, children } = props
@@ -17,14 +18,28 @@ function CollapseItem(props: CollapseItemProps) {
 
   return (
     <div className={classes}>
-      <div className="x-collapse-item__header" id={`item-header-${name}`} onClick={handleClick}>
+      <div
+        className={classNames('x-collapse-item__header', {
+          'is-active': isActive,
+          'is-disabled': disabled,
+        })}
+        id={`item-header-${name}`}
+        onClick={handleClick}
+      >
         {title}
       </div>
-      {isActive && (
-        <div className="x-collapse-item__content" id={`item-content-${name}`}>
-          {children}
-        </div>
-      )}
+      <motion.div
+        className="x-collapse-item__content"
+        animate={
+          isActive
+            ? { opacity: 1, display: 'block' }
+            : { opacity: 0, transitionEnd: { display: 'none' } }
+        }
+        transition={{ duration: 0.2 }}
+        id={`item-content-${name}`}
+      >
+        {children}
+      </motion.div>
     </div>
   )
 }
