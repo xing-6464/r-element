@@ -50,6 +50,7 @@
   color: var(--x-collapse-content-text-color);
   border-bottom: 1px solid var(--x-collapse-border-color);
   padding-bottom: 25px;
+  padding-top: 20px;
 }
 .slide-enter-active,
 .slide-exit-active {

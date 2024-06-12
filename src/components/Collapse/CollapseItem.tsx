@@ -19,21 +19,25 @@ function CollapseItem(props: CollapseItemProps) {
   const transitionEvent: Record<string, (e: HTMLElement) => void> = {
     onEnter: (e) => {
       e.style.height = '0px'
+      e.style.overflow = 'hidden'
     },
     onEntering: (e) => {
       e.style.height = `${e.scrollHeight}px`
     },
     onEntered: (e) => {
       e.style.height = ''
+      e.style.overflow = ''
     },
     onExit: (e) => {
       e.style.height = `${e.scrollHeight}px`
+      e.style.overflow = 'hidden'
     },
     onExiting: (e) => {
       e.style.height = '0px'
     },
     onExited: (e) => {
       e.style.height = ''
+      e.style.overflow = ''
     },
   }
 
@@ -56,8 +60,10 @@ function CollapseItem(props: CollapseItemProps) {
         unmountOnExit
         {...transitionEvent}
       >
-        <div className="x-collapse-item__content" id={`item-content-${name}`}>
-          {children}
+        <div className="x-collapse-item__wrapper">
+          <div className="x-collapse-item__content" id={`item-content-${name}`}>
+            {children}
+          </div>
         </div>
       </CSSTransition>
     </div>
