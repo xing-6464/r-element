@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import { collapseContext } from './Collapse'
 import type { CollapseItemProps } from './types'
 import { useContext, useMemo } from 'react'
-import { motion } from 'framer-motion'
+import { CSSTransition } from 'react-transition-group'
 
 function CollapseItem(props: CollapseItemProps) {
   const { className, name, title, disabled, children } = props
@@ -14,6 +14,27 @@ function CollapseItem(props: CollapseItemProps) {
   const handleClick = () => {
     if (props.disabled) return
     setActiveNames(props.name)
+  }
+
+  const transitionEvent: Record<string, (e: HTMLElement) => void> = {
+    onEnter: (e) => {
+      e.style.height = '0px'
+    },
+    onEntering: (e) => {
+      e.style.height = `${e.scrollHeight}px`
+    },
+    onEntered: (e) => {
+      e.style.height = ''
+    },
+    onExit: (e) => {
+      e.style.height = `${e.scrollHeight}px`
+    },
+    onExiting: (e) => {
+      e.style.height = '0px'
+    },
+    onExited: (e) => {
+      e.style.height = ''
+    },
   }
 
   return (
@@ -28,18 +49,17 @@ function CollapseItem(props: CollapseItemProps) {
       >
         {title}
       </div>
-      <motion.div
-        className="x-collapse-item__content"
-        animate={
-          isActive
-            ? { opacity: 1, display: 'block' }
-            : { opacity: 0, transitionEnd: { display: 'none' } }
-        }
-        transition={{ duration: 0.2 }}
-        id={`item-content-${name}`}
+      <CSSTransition
+        in={isActive}
+        timeout={300}
+        classNames="slide"
+        unmountOnExit
+        {...transitionEvent}
       >
-        {children}
-      </motion.div>
+        <div className="x-collapse-item__content" id={`item-content-${name}`}>
+          {children}
+        </div>
+      </CSSTransition>
     </div>
   )
 }
