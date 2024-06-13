@@ -3,6 +3,7 @@ import { useRef, useState } from 'react'
 import Collapse from './components/Collapse/Collapse'
 import CollapseItem from './components/Collapse/CollapseItem'
 import { NameType } from './components/Collapse/types'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 function App() {
   const ref = useRef(null)
@@ -10,6 +11,8 @@ function App() {
 
   return (
     <>
+      <FontAwesomeIcon type="solid" icon="user-secret" />
+      <br />
       <Button ref={ref}>Test Button</Button>
       <Button plain>Test Button</Button>
       <Button round>Test Button</Button>
