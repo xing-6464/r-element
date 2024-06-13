@@ -4,6 +4,7 @@ import Collapse from './components/Collapse/Collapse'
 import CollapseItem from './components/Collapse/CollapseItem'
 import { NameType } from './components/Collapse/types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Icon from './components/Icon/Icon'
 
 function App() {
   const ref = useRef(null)
@@ -12,6 +13,7 @@ function App() {
   return (
     <>
       <FontAwesomeIcon type="solid" icon="user-secret" />
+      <Icon icon="arrow-up" size="2xl" spin />
       <br />
       <Button ref={ref}>Test Button</Button>
       <Button plain>Test Button</Button>
