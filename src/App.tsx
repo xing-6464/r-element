@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Icon from './components/Icon/Icon'
 import { SizeProp } from '@fortawesome/fontawesome-svg-core'
 import { Placement, useFloating } from '@floating-ui/react'
+import Tooltip from './components/Tooltip/Tooltip'
 
 function App() {
   const ref = useRef(null)
@@ -23,6 +24,10 @@ function App() {
 
   return (
     <>
+      <Tooltip content={<h1>hello</h1>} placement="right">
+        <img src="./assets/react.svg" width={120} height={120} />
+      </Tooltip>
+      <br />
       <>
         <img ref={refs.setReference} src="./assets/react.svg" width={120} height={120} />
         <div ref={refs.setFloating} style={floatingStyles}>
