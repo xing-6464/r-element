@@ -17,14 +17,16 @@ function App() {
   const { refs, floatingStyles } = useFloating({
     placement,
   })
+  const [trigger, setTrigger] = useState<'hover' | 'click'>('hover')
 
   setTimeout(() => {
     setPlacement('bottom')
+    setTrigger('click')
   }, 2000)
 
   return (
     <>
-      <Tooltip content={<h1>hello</h1>} placement="right">
+      <Tooltip content={<h1>hello</h1>} placement="right" trigger={trigger}>
         <img src="./assets/react.svg" width={120} height={120} />
       </Tooltip>
       <br />
