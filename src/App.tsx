@@ -9,11 +9,18 @@ import Icon from './components/Icon/Icon'
 function App() {
   const ref = useRef(null)
   const [openedValue, setOpenedValue] = useState<NameType[]>(['a'])
+  const [size, setSize] = useState('3x')
+
+  setTimeout(() => {
+    setSize('1x')
+  }, 2000)
 
   return (
     <>
       <FontAwesomeIcon type="solid" icon="user-secret" />
       <Icon icon="arrow-up" size="2xl" spin />
+      <Icon icon="arrow-up" size="2xl" type="primary" />
+      <Icon icon="arrow-up" size={size} type="primary" color="red" />
       <br />
       <Button ref={ref}>Test Button</Button>
       <Button plain>Test Button</Button>
