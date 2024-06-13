@@ -6,18 +6,30 @@ import { NameType } from './components/Collapse/types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Icon from './components/Icon/Icon'
 import { SizeProp } from '@fortawesome/fontawesome-svg-core'
+import { Placement, useFloating } from '@floating-ui/react'
 
 function App() {
   const ref = useRef(null)
   const [openedValue, setOpenedValue] = useState<NameType[]>(['a'])
   const [size, setSize] = useState<SizeProp>('10x')
+  const [placement, setPlacement] = useState<Placement>('right')
+  const { refs, floatingStyles } = useFloating({
+    placement,
+  })
 
   setTimeout(() => {
-    setSize('1x')
+    setPlacement('bottom')
   }, 2000)
 
   return (
     <>
+      <>
+        <img ref={refs.setReference} src="./assets/react.svg" width={120} height={120} />
+        <div ref={refs.setFloating} style={floatingStyles}>
+          Tooltip
+        </div>
+      </>
+      <br />
       <FontAwesomeIcon type="solid" icon="user-secret" />
       <Icon icon="arrow-up" size="2xl" spin />
       <Icon icon="arrow-up" size="2xl" type="primary" />
