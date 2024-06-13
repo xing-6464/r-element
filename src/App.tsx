@@ -5,11 +5,12 @@ import CollapseItem from './components/Collapse/CollapseItem'
 import { NameType } from './components/Collapse/types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Icon from './components/Icon/Icon'
+import { SizeProp } from '@fortawesome/fontawesome-svg-core'
 
 function App() {
   const ref = useRef(null)
   const [openedValue, setOpenedValue] = useState<NameType[]>(['a'])
-  const [size, setSize] = useState('3x')
+  const [size, setSize] = useState<SizeProp>('10x')
 
   setTimeout(() => {
     setSize('1x')
@@ -47,6 +48,15 @@ function App() {
       <Button type="info" plain>
         Info
       </Button>
+      <br />
+
+      <Button type="info" loading icon="arrow-up">
+        Info
+      </Button>
+      <Button type="info" icon="arrow-up">
+        Info
+      </Button>
+      <br />
 
       <Collapse accordion modeValue={openedValue} onChange={(value) => setOpenedValue(value)}>
         <CollapseItem name="a" title={<h1>nice title</h1>}>

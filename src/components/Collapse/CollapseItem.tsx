@@ -3,6 +3,7 @@ import { collapseContext } from './Collapse'
 import type { CollapseItemProps } from './types'
 import { useContext, useMemo } from 'react'
 import { CSSTransition } from 'react-transition-group'
+import Icon from '../Icon/Icon'
 
 function CollapseItem(props: CollapseItemProps) {
   const { className, name, title, disabled, children } = props
@@ -52,6 +53,7 @@ function CollapseItem(props: CollapseItemProps) {
         onClick={handleClick}
       >
         {title}
+        <Icon icon="angle-right" className="header-angle" />
       </div>
       <CSSTransition
         in={isActive}
