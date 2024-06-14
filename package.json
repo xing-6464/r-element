@@ -11,11 +11,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@floating-ui/core": "^1.6.2",
     "@floating-ui/react": "^0.26.17",
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
+    "@popperjs/core": "^2.11.8",
     "@react-spring/web": "^9.7.3",
+    "ahooks": "^3.8.0",
     "classnames": "^2.5.1",
     "framer-motion": "^11.2.9",
     "postcss-color-mix": "^1.1.0",

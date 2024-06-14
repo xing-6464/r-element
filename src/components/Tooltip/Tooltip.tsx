@@ -1,13 +1,20 @@
-import React, { DOMAttributes, useState } from 'react'
-import { TooltipProps } from './types'
+import React, { DOMAttributes, useImperativeHandle, useState } from 'react'
+import { TooltipInstance, TooltipProps } from './types'
 import { useClick, useFloating, useHover, useInteractions } from '@floating-ui/react'
-import useClickOutside from '../../hooks/useClickOutside'
+import { useClickAway } from 'ahooks'
 
-function Tooltip(props: TooltipProps) {
-  const { trigger = 'hover', placement = 'bottom', content, children, onVisibleChange } = props
+const Tooltip = React.forwardRef<TooltipInstance, TooltipProps>(function (props, ref) {
+  const {
+    trigger = 'hover',
+    manual = false,
+    placement = 'bottom',
+    content,
+    children,
+    onVisibleChange,
+  } = props
 
-  const containerRef = React.useRef<HTMLDivElement | null>(null)
   const [isOpen, setIsOpen] = useState(false)
+  const containerRef = React.useRef<HTMLDivElement>(null)
   const { refs, floatingStyles, context } = useFloating({
     open: isOpen,
     onOpenChange: setIsOpen,
@@ -18,16 +25,17 @@ function Tooltip(props: TooltipProps) {
   const hover = useHover(context, { enabled: trigger === 'hover' })
 
   const { getFloatingProps, getReferenceProps } = useInteractions([click, hover])
-  useClickOutside(containerRef, () => {
-    if (props.trigger === 'click' && isOpen === true) {
+  useClickAway(() => {
+    if (isOpen && trigger === 'click' && !manual) {
       close()
     }
-  })
+  }, containerRef)
 
   const events: DOMAttributes<HTMLDivElement> = {}
+  const outerEvents: DOMAttributes<HTMLDivElement> = {}
   if (trigger === 'hover') {
     events['onMouseEnter'] = open
-    events['onMouseLeave'] = close
+    outerEvents['onMouseLeave'] = close
   } else if (trigger === 'click') {
     events['onClick'] = togglePopper
   }
@@ -47,8 +55,18 @@ function Tooltip(props: TooltipProps) {
     onVisibleChange?.(true)
   }
 
+  useImperativeHandle(ref, () => ({
+    show: open,
+    hide: close,
+  }))
+
   return (
-    <div ref={containerRef} className="x-tooltip" style={{ display: 'inline-block' }}>
+    <div
+      ref={containerRef}
+      {...outerEvents}
+      className="x-tooltip"
+      style={{ display: 'inline-block' }}
+    >
       <div
         ref={refs.setReference}
         {...getReferenceProps()}
@@ -70,5 +88,5 @@ function Tooltip(props: TooltipProps) {
       )}
     </div>
   )
-}
+})
 export default Tooltip

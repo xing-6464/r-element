@@ -8,25 +8,34 @@ import Icon from './components/Icon/Icon'
 import { SizeProp } from '@fortawesome/fontawesome-svg-core'
 import { Placement, useFloating } from '@floating-ui/react'
 import Tooltip from './components/Tooltip/Tooltip'
+import { TooltipInstance } from './components/Tooltip/types'
 
 function App() {
   const ref = useRef(null)
   const [openedValue, setOpenedValue] = useState<NameType[]>(['a'])
-  const [size, setSize] = useState<SizeProp>('10x')
+  const size: SizeProp = '10x'
   const [placement, setPlacement] = useState<Placement>('right')
   const { refs, floatingStyles } = useFloating({
     placement,
   })
-  const [trigger, setTrigger] = useState<'hover' | 'click'>('hover')
+  const [trigger, setTrigger] = useState<'hover' | 'click'>('click')
+  const tooltipRef = useRef<TooltipInstance>(null)
 
   setTimeout(() => {
     setPlacement('bottom')
-    setTrigger('click')
   }, 2000)
+
+  function open(e) {
+    tooltipRef.current?.show()
+  }
+
+  function close() {
+    tooltipRef.current?.hide()
+  }
 
   return (
     <>
-      <Tooltip content={<h1>hello</h1>} placement="right" trigger={trigger}>
+      <Tooltip content={<h1>hello</h1>} placement="right" trigger={trigger} manual ref={tooltipRef}>
         <img src="./assets/react.svg" width={120} height={120} />
       </Tooltip>
       <br />
@@ -43,8 +52,12 @@ function App() {
       <Icon icon="arrow-up" size={size} type="primary" color="red" />
       <br />
       <Button ref={ref}>Test Button</Button>
-      <Button plain>Test Button</Button>
-      <Button round>Test Button</Button>
+      <Button plain onClick={open}>
+        Test Button
+      </Button>
+      <Button round onClick={close}>
+        Test Button
+      </Button>
       <Button circle>Test Button</Button>
       <Button disabled>Test Button</Button>
       <br></br>

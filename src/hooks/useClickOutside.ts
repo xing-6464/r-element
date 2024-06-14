@@ -1,9 +1,7 @@
-import { useEffect, type RefObject } from 'react'
+import { useEffect, useRef } from 'react'
 
-function useClickOutside(
-  elementRef: RefObject<HTMLElement | null>,
-  callback: (e: MouseEvent) => void,
-) {
+function useClickOutside(callback: (e: MouseEvent) => void) {
+  const elementRef = useRef<HTMLDivElement>(null)
   useEffect(() => {
     document.addEventListener('click', handler)
 
@@ -19,6 +17,8 @@ function useClickOutside(
       }
     }
   }
+
+  return { elementRef }
 }
 
 export default useClickOutside
