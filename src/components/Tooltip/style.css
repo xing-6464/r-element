@@ -1,0 +1,19 @@
+.x-tooltip {
+  .fade-enter-active {
+    opacity: 1;
+    transition: opacity var(--transition-duration) ease-in;
+  }
+
+  .fade-enter {
+    opacity: 0;
+  }
+
+  .fade-exit {
+    opacity: 1;
+  }
+
+  .fade-exit-active {
+    opacity: 0;
+    transition: opacity var(--transition-duration) ease-out;
+  }
+}

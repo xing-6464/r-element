@@ -23,9 +23,10 @@ function App() {
 
   setTimeout(() => {
     setPlacement('bottom')
+    // setTrigger('hover')
   }, 2000)
 
-  function open(e) {
+  function open() {
     tooltipRef.current?.show()
   }
 
@@ -35,7 +36,14 @@ function App() {
 
   return (
     <>
-      <Tooltip content={<h1>hello</h1>} placement="right" trigger={trigger} ref={tooltipRef}>
+      <Tooltip
+        content={<h1>hello</h1>}
+        placement="right"
+        trigger={trigger}
+        manual
+        ref={tooltipRef}
+        popperOptions={{ placement: 'right-end', strategy: 'fixed' }}
+      >
         <img src="./assets/react.svg" width={120} height={120} />
       </Tooltip>
       <br />

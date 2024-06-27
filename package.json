@@ -19,6 +19,7 @@
     "@popperjs/core": "^2.11.8",
     "@react-spring/web": "^9.7.3",
     "ahooks": "^3.8.0",
+    "animate.css": "^4.1.1",
     "classnames": "^2.5.1",
     "framer-motion": "^11.2.9",
     "postcss-color-mix": "^1.1.0",
