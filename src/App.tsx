@@ -35,7 +35,7 @@ function App() {
 
   return (
     <>
-      <Tooltip content={<h1>hello</h1>} placement="right" trigger={trigger} manual ref={tooltipRef}>
+      <Tooltip content={<h1>hello</h1>} placement="right" trigger={trigger} ref={tooltipRef}>
         <img src="./assets/react.svg" width={120} height={120} />
       </Tooltip>
       <br />

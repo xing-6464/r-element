@@ -1,17 +1,10 @@
 import React, { DOMAttributes, useImperativeHandle, useState } from 'react'
 import { TooltipInstance, TooltipProps } from './types'
 import { useClick, useFloating, useHover, useInteractions } from '@floating-ui/react'
-import { useClickAway } from 'ahooks'
+import useClickOutside from '../../hooks/useClickOutside'
 
 const Tooltip = React.forwardRef<TooltipInstance, TooltipProps>(function (props, ref) {
-  const {
-    trigger = 'hover',
-    manual = false,
-    placement = 'bottom',
-    content,
-    children,
-    onVisibleChange,
-  } = props
+  const { trigger = 'hover', placement = 'bottom', content, children, onVisibleChange } = props
 
   const [isOpen, setIsOpen] = useState(false)
   const containerRef = React.useRef<HTMLDivElement>(null)
@@ -25,11 +18,11 @@ const Tooltip = React.forwardRef<TooltipInstance, TooltipProps>(function (props,
   const hover = useHover(context, { enabled: trigger === 'hover' })
 
   const { getFloatingProps, getReferenceProps } = useInteractions([click, hover])
-  useClickAway(() => {
-    if (isOpen && trigger === 'click' && !manual) {
+  useClickOutside(containerRef, () => {
+    if (props.trigger === 'click' && isOpen) {
       close()
     }
-  }, containerRef)
+  })
 
   const events: DOMAttributes<HTMLDivElement> = {}
   const outerEvents: DOMAttributes<HTMLDivElement> = {}
